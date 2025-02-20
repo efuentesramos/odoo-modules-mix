@@ -1,0 +1,31 @@
+*.pyc
+*.pyo
+__pycache__/
+.env
+addons/*/node_modules/
+addons/*/*.log
+
+
+# Ignorar archivos de logs y bases de datos temporales
+*.log
+*.db
+*.sqlite3
+
+# Ignorar dependencias de Python
+venv/
+.env
+.DS_Store
+
+# Ignorar archivos de Odoo
+*.swp
+*.zip
+odoo/custom/
+odoo16/odoo/addons/*/__pycache__/
+
+# Configuración y caché de Visual Studio Code
+.vscode/
+.vscode/*
+
+# Archivos de historial y depuración
+*.code-workspace
+.history/
