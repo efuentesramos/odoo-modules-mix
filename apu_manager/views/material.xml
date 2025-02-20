@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="apu_manager_material_view_form" model="ir.ui.view">
+            <field name="name">material.view.form</field>
+            <field name="model">apu.manager.material</field>
+            <field name="arch" type="xml">
+                <form string="Materiales">
+                  
+                        <group>
+                            <field name="name"/>
+                            <field name="unit_measurement"/>
+                            <field name="unit_cost" />                     
+                        </group>
+                        
+                   
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="apu_manager_material_action" model="ir.actions.act_window">
+            <field name="name">Materiales</field>
+            <field name="res_model">apu.manager.material</field>
+            <field name="view_mode">form</field>
+        </record>
+
+
+    <menuitem id="menu_root" name="APU" />
+    
+    <menuitem id="menu_material" name="Material" parent="menu_root" />
+
+    <menuitem id="menu__material__act" 
+            name="Materiales" 
+            parent="menu_material" 
+            action="apu_manager_material_action" 
+            sequence="30"/>
+
+    </data>
+
+</odoo>
+

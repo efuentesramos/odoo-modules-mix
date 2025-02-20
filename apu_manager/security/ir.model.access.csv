@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_apu_manager_material,apu.manager.material,model_apu_manager_material,base.group_user,1,1,1,1
+access_apu_manager_apu,apu.manager.apu,model_apu,base.group_user,1,1,1,1
+access_apu_manager_detail_material,apu.manager.detail.material,model_detail_material,base.group_user,1,1,1,1
+
+access_apu_manager_equipment,apu.manager.equipment,model_apu_manager_equipment,base.group_user,1,1,1,1
+access_apu_manager_detail_equipment,apu.manager.detail.equipment,model_detail_equipment,base.group_user,1,1,1,1
+access_apu_manager_other_item,apu.manager.other.item,model_other_item,base.group_user,1,1,1,1
+access_apu_manager_detail_other,apu.manager.detail.other,model_detail_other_item,base.group_user,1,1,1,1
+
+access_apu_manager_manpower,apu.manager.manpower,model_apu_manager_manpower,base.group_user,1,1,1,1
+access_apu_manager_detail_manpower,apu.manager.detail.manpower,model_detail_manpower,base.group_user,1,1,1,1
+

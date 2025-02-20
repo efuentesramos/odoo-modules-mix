@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="apu_manager_equipment_view_form" model="ir.ui.view">
+            <field name="name">equipment.view.form</field>
+            <field name="model">apu.manager.equipment</field>
+            <field name="arch" type="xml">
+                <form string="equipos">
+                  
+                        <group>
+                            <field name="name"/>
+                            <field name="unit_measurement"/>
+                            <field name="unit_cost" />                     
+                        </group>
+                        
+                   
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="apu_manager_equipment_action" model="ir.actions.act_window">
+            <field name="name">equipment</field>
+            <field name="res_model">apu.manager.equipment</field>
+            <field name="view_mode">form</field>
+        </record>
+
+
+    
+    
+    <menuitem id="menu_equipment" name="equipment" parent="menu_root" />
+
+    <menuitem id="menu__equipment__act" 
+            name="equipment" 
+            parent="menu_equipment" 
+            action="apu_manager_equipment_action" 
+            sequence="30"/>
+
+    </data>
+
+</odoo>

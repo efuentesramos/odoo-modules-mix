@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+        <record id="apu_manager_other_item_view_form" model="ir.ui.view">
+            <field name="name">other.item.view.form</field>
+            <field name="model">other.item</field>
+            <field name="arch" type="xml">
+                <form string="Otros Items">
+                  
+                        <group>
+                            <field name="name"/>
+                            <field name="unit_measurement"/>
+                            <field name="unit_cost" />                     
+                        </group>
+                        
+                   
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="apu_manager_other_item_action" model="ir.actions.act_window">
+            <field name="name">other</field>
+            <field name="res_model">other.item</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    
+    <menuitem id="menu_other_item" name="Otros_item" parent="menu_root" />
+
+    <menuitem id="menu__other_item__act" 
+            name="other_item" 
+            parent="menu_other_item" 
+            action="apu_manager_other_item_action" 
+            sequence="30"/>
+
+    </data>
+
+</odoo>

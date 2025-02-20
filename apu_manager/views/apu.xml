@@ -1,0 +1,217 @@
+<odoo>
+    <data>
+        <record id="apu_view_form" model="ir.ui.view">
+            <field name="name">apu.view.form</field>
+            <field name="model">apu</field>
+            <field name="arch" type="xml">
+                <form string="ANALISIS PRECIO UNITARIO (APU)">
+                    <sheet>
+
+                        <div class="o_form_label oe_center" style="width:100%;">
+                            <h1>Analisis De Precios Unitarios</h1>
+                        </div>
+
+                        <group>
+                            <group >
+                                <field name="name" />
+                                <field name="contractor" />
+                                <field name="description" />
+                               
+                            </group>
+                            
+                           
+                        </group>
+                        <h2 class="oe_center">Detalles de Materiales </h2>
+                        <notebook>
+                            <page name="Detalle" string="Materiales">
+                                <field name="detail_material_id">
+                                    <tree create="1" edit="1" delete="1" editable="top">
+                                        <field name="material_id"/>
+                                        <field name="unit_measurement"/>                                        
+                                        <field name="amount"/>
+                                        <field name="unit_cost"/>
+                                        <field name="material_cost" sum="Total"/>
+                                        <field name="profit"/>
+                                        <field name="total_profit" sum="Total"/>
+                                        <field name="sale_price" sum="Total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                        <h2 class="oe_center">Detalles de Equipos </h2>
+                        <notebook>
+                            <page name="Detalle" string="Equipos">
+                                <field name="detail_equipment_id">
+                                    <tree create="1" edit="1" delete="1" editable="top">
+                                        <field name="equipment_id"/>
+                                        <field name="unit_measurement"/>                                        
+                                        <field name="amount"/>
+                                        <field name="unit_cost"/>
+                                        <field name="equipment_cost" sum="Total"/>
+                                        <field name="profit"/>
+                                        <field name="total_profit" sum="Total"/>
+                                        <field name="sale_price" sum="Total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                        <h2 class="oe_center">Detalles de Mano De Obra </h2>
+                        <notebook>
+                            <page name="Detalle" string="Mano De Obra">
+                                <field name="detail_manpower_id">
+                                    <tree create="1" edit="1" delete="1" editable="top">
+                                        <field name="manpower_id"/>
+                                        <field name="unit_measurement"/>                                        
+                                        <field name="amount"/>
+                                        <field name="unit_cost"/>
+                                        <field name="manpower_cost" sum="Total"/>
+                                        <field name="profit"/>
+                                        <field name="total_profit" sum="Total"/>
+                                        <field name="sale_price" sum="Total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                        <h2 class="oe_center">Otros</h2>
+                        <notebook>
+                            <page name="Detalle" string="Otros">
+                                <field name="detail_other_item_id">
+                                    <tree create="1" edit="1" delete="1" editable="top">
+                                        <field name="other_item_id"/>
+                                        <field name="unit_measurement"/>                                        
+                                        <field name="amount"/>
+                                        <field name="unit_cost"/>
+                                        <field name="other_item_cost" sum="Total"/>
+                                        <field name="profit"/>
+                                        <field name="total_profit" sum="Total"/>
+                                        <field name="sale_price" sum="Total" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+
+                        <h1>Resumen APU</h1>
+
+                        <group col="2">
+
+                            <group >
+
+                                <table >
+                                    <thead>
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>% Costo</th>
+                                            <th>Costo Total</th>
+                                            <th>Venta Total</th>
+                                        </tr>
+                                    </thead> 
+
+                                    
+                                    <tr>
+                                        <td>Materiales</td>
+                                        <td><field name="material_costs_percent" widget="percentage"/></td>
+                                        <td><field name="material_costs" widget="monetary"/></td>
+                                        <td><field name="material_sales" widget="monetary"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equipos</td>
+                                        <td><field name="equipment_costs_percent" widget="percentage"/></td>
+                                        <td><field name="equipment_costs" widget="monetary"/></td>
+                                        <td><field name="equipment_sales" widget="monetary"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mano De Obra</td>
+                                        <td><field name="manpower_costs_percent" widget="percentage"/></td>
+                                        <td><field name="manpower_costs" widget="monetary"/></td>
+                                        <td><field name="manpower_sales" widget="monetary"/></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Otro</td>
+                                        <td><field name="other_costs_percent" widget="percentage"/></td>
+                                        <td><field name="other_costs" widget="monetary"/></td>
+                                        <td><field name="other_sales" widget="monetary"/></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>TOTAL</td>
+                                        <td><field name="percent_total" widget="percentage"/></td>
+                                        <td><field name="cost_total" widget="monetary"/></td>
+                                        <td><field name="sale_total" widget="monetary"/></td>
+                                        
+                                    </tr>
+                                    
+                                </table>
+                               
+                           
+                            </group>
+
+                            <group>
+                                  
+                                <table >
+                                    <thead>
+                                        <tr>
+                                            <th>TOTAL COSTO</th>
+                                            <th>TOTAL % UTILIDAD VENTA</th>
+                                            <th>UTILIDAD TOTAL VENTA</th>
+                                            <th>PRECIO VENTA TOTAL</th>
+                                        </tr>
+                                    </thead> 
+
+                                    
+                                    <tr>
+                                        <td><field name="cost_total" widget="monetary"/></td>
+                                        <td><field name="percent_profit_total" widget="percentage"/></td>
+                                        <td><field name="profit_total" widget="monetary"/></td>
+                                        <td><field name="sale_total" widget="monetary"/></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>TRM</td>
+                                        <td><field name="trm_usd"/></td>
+                                        <td>USD</td>
+                                        <td><field name="sales_in_dollar"/></td>
+                                    </tr>
+                                   
+                                </table>
+                            
+                            </group>
+
+
+
+                        </group>
+
+                        
+
+                        
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+          <record id="apu_manager_apu_action" model="ir.actions.act_window">
+            <field name="name">Apu</field>
+            <field name="res_model">apu</field>
+            <field name="view_mode">form</field>
+        </record>
+
+
+   
+    <menuitem id="menu_apu" name="apus" parent="menu_root" />
+
+    <menuitem id="menu__apu__act" 
+            name="Apu" 
+            parent="menu_apu" 
+            action="apu_manager_apu_action" 
+            sequence="30"/>
+
+       
+
+    </data>
+</odoo>
