@@ -300,20 +300,47 @@ class apu(models.Model):
             connection = dbsource.connection_open_mssql()
             transaction = connection.begin() #conexion a base de datos 
             
-            #consulta para traer el numero de la ultima orden en DMS
-
+           # -------------  Query for all Items --------------
+                
             material_db=self.env['apu.manager.material']
+            equipment_db=self.env['apu.manager.equipment']
+            manpower_db=self.env['apu.manager.manpower']
+            #other_items_db=self.env['other.item']
 
-            #query = "select name FROM material"
-            query = text("SELECT * FROM material")  
+            query_material_db = text("SELECT * FROM material")
+            query_equipment_db = text("SELECT * FROM equipment")
+            query_manpower_db = text("SELECT * FROM manpower")  
+            #query_other_items_db = text("SELECT * FROM other.item")
             
-            name_materials = connection.execute(query).fetchall()
+            all_materials = connection.execute(query_material_db).fetchall()
+            all_equipment = connection.execute(query_equipment_db).fetchall()
+            all_mampower = connection.execute(query_manpower_db).fetchall()
+            #all_othre_item = connection.execute(query_material_db).fetchall()
 
-            print ("***** ESTOS SON LOS MATERIALES ****     :  ",name_materials[1])
+            
 
-            for item_material in name_materials:
+            #---------- Creation Of Materials Record  -----------------
+
+            for item_material in all_materials:
+
                 material_db.create({'name':item_material[0],'unit_measurement':item_material[1],'unit_cost':item_material[2] })
             
+
+             #---------- Creation Of Equipment Record  -----------------
+
+            for item_material in all_equipment:
+
+                equipment_db.create({'name':item_material[0],'unit_measurement':item_material[1],'unit_cost':item_material[2] })
+            
+
+             #---------- Creation Of Manpower Record  -----------------
+
+            for item_material in all_mampower:
+
+                manpower_db.create({'name':item_material[0],'unit_measurement':item_material[1],'unit_cost':item_material[2] })
+            
+
+
             dbsource.connection_close_mssql(connection)
 
         except Exception as error_astivik:
@@ -326,23 +353,4 @@ class apu(models.Model):
                 str(error_astivik.args and error_astivik.args[0] or error_astivik))
            
 
-
-
-""" @api.depends('unit_cost', 'amount')
-    def _compute_material_cost(self):
-        
-        for record in self:
-            
-            record.material_cost = record.unit_cost * record.amount
-
-
-    detail_material_id = fields.One2many('detalle.material', 'apu_id', string="Detalle de Material")
-    material_cost = fields.Float(string="Costo Total de Materiales", compute="_compute_material_cost", store=True)
-
-    @api.depends('detail_material_id.material_cost')
-    def _compute_material_cost(self):
-        for record in self:
-            record.material_cost = sum(record.detail_material_id.mapped('material_cost'))
-
- """
     
