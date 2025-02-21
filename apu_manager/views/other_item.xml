@@ -17,11 +17,26 @@
             </field>
         </record>
 
+
+        <record id="apu_manager_other_item_view_tree" model="ir.ui.view">
+            <field name="name">other.item.view.tree</field>
+            <field name="model">other.item</field>
+            <field name="arch" type="xml">
+                <tree string="Otros Items">
+                              
+                    <field name="name"/>
+                    <field name="unit_measurement"/>
+                    <field name="unit_cost" />                     
+                
+                </tree>
+            </field>
+        </record>
+
         
         <record id="apu_manager_other_item_action" model="ir.actions.act_window">
             <field name="name">other</field>
             <field name="res_model">other.item</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
     

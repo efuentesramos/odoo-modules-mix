@@ -26,11 +26,11 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/material.xml',
+        'views/apu.xml',
         'views/equipment.xml',
         'views/other_item.xml',
         'views/manpower.xml',
-        'views/apu.xml',
+        'views/material.xml',
 
     ],
     # only loaded in demonstration mode

@@ -2,6 +2,9 @@
 from odoo import api, fields, models
 import datetime
 from datetime import date
+from odoo.exceptions import ValidationError
+from odoo.tools.translate import _  # ✅ Importar `_` correctamente
+from sqlalchemy.sql import text  
 
 
 class apu(models.Model): 
@@ -275,6 +278,55 @@ class apu(models.Model):
             else :
                 record.sales_in_dollar = 0
                 
+
+
+    def update_items_apu(self):
+        """Método para actualizar items en el APU"""
+        print ("******  I T E M S     F O R     A P U S *******")
+        
+        #base_dbs_obj = self.env['base.external.dbsource']
+
+        dbsource = self.env['base.external.dbsource'].search([('name', '=', 'astivikDB')], limit=1)
+        if not dbsource:
+            raise ValidationError(_('No se encuentra el registro para conexión a la base de  Datos de Astivik. \n' \
+                                    'Asegurece de que el registro de configuración se llame "astivikDB"\n' \
+                                    'Ajustes/Estructura de la base de datos/Database Sources'))
+
+
+    
+
+
+        try:
+            connection = dbsource.connection_open_mssql()
+            transaction = connection.begin() #conexion a base de datos 
+            
+            #consulta para traer el numero de la ultima orden en DMS
+
+            material_db=self.env['apu.manager.material']
+
+            #query = "select name FROM material"
+            query = text("SELECT * FROM material")  
+            
+            name_materials = connection.execute(query).fetchall()
+
+            print ("***** ESTOS SON LOS MATERIALES ****     :  ",name_materials[1])
+
+            for item_material in name_materials:
+                material_db.create({'name':item_material[0],'unit_measurement':item_material[1],'unit_cost':item_material[2] })
+            
+            dbsource.connection_close_mssql(connection)
+
+        except Exception as error_astivik:
+            if transaction and connection:
+                transaction.rollback()
+                dbsource.connection_close_mssql(connection)
+            
+            #raise ValueError("No se encontró la conexión a MSSQL en 'base.external.dbsource'.")
+            raise ValidationError(_('No se ha podido enviar a DMS \n\n %s') % 
+                str(error_astivik.args and error_astivik.args[0] or error_astivik))
+           
+
+
 
 """ @api.depends('unit_cost', 'amount')
     def _compute_material_cost(self):

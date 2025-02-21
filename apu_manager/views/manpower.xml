@@ -17,11 +17,25 @@
             </field>
         </record>
 
+        <record id="apu_manager_manpower_view_tree" model="ir.ui.view">
+            <field name="name">manpower.view.tree</field>
+            <field name="model">apu.manager.manpower</field>
+            <field name="arch" type="xml">
+                <tree string="Mano de Obra">
+                  
+                    <field name="name"/>
+                    <field name="unit_measurement"/>
+                    <field name="unit_cost" />                     
+
+                </tree>
+            </field>
+        </record>
+
         
         <record id="apu_manager_manpower_action" model="ir.actions.act_window">
             <field name="name">manpower</field>
             <field name="res_model">apu.manager.manpower</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
 

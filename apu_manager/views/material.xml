@@ -17,15 +17,31 @@
             </field>
         </record>
 
+
+        <record id="apu_manager_material_view_tree" model="ir.ui.view">
+            <field name="name">material.view.tree</field>
+            <field name="model">apu.manager.material</field>
+            <field name="arch" type="xml">
+                <tree string="Materiales">
+                   
+                    <field name="name"/>
+                    <field name="unit_measurement"/>
+                    <field name="unit_cost" />                     
+                        
+                </tree>
+            </field>
+        </record>
+
+
         
         <record id="apu_manager_material_action" model="ir.actions.act_window">
             <field name="name">Materiales</field>
             <field name="res_model">apu.manager.material</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
 
-    <menuitem id="menu_root" name="APU" />
+   
     
     <menuitem id="menu_material" name="Material" parent="menu_root" />
 

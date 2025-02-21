@@ -17,11 +17,26 @@
             </field>
         </record>
 
+
+        <record id="apu_manager_equipment_view_tree" model="ir.ui.view">
+            <field name="name">equipment.view.tree</field>
+            <field name="model">apu.manager.equipment</field>
+            <field name="arch" type="xml">
+                <tree string="equipos">
+                  
+                        <field name="name"/>
+                        <field name="unit_measurement"/>
+                        <field name="unit_cost" />                           
+                   
+                </tree>
+            </field>
+        </record>
+
         
         <record id="apu_manager_equipment_action" model="ir.actions.act_window">
             <field name="name">equipment</field>
             <field name="res_model">apu.manager.equipment</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
 

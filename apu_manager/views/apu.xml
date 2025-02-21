@@ -19,6 +19,12 @@
                                
                             </group>
                             
+                            <group>
+                                <button name="update_items_apu" 
+                                        string="Actualizar Items" 
+                                        type="object"
+                                        class="btn-primary"/>
+                            </group>
                            
                         </group>
                         <h2 class="oe_center">Detalles de Materiales </h2>
@@ -194,14 +200,32 @@
             </field>
         </record>
 
+        <record id="apu_manager_apu_view_tree" model="ir.ui.view">
+            <field name="name">apu.view.tree</field>
+            <field name="model">apu</field>
+            <field name="arch" type="xml">
+                <tree string="APU">
+                   
+                    <field name="name" />
+                    <field name="contractor" />
+                    <field name="description" /> 
+                    <field name="cost_total" widget="monetary"/>
+                    <field name="percent_profit_total" widget="percentage"/>
+                    <field name="profit_total" widget="monetary"/>
+                    <field name="sale_total" widget="monetary"/>                  
+    
+                </tree>
+            </field>
+        </record>
+
 
           <record id="apu_manager_apu_action" model="ir.actions.act_window">
             <field name="name">Apu</field>
             <field name="res_model">apu</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
         </record>
 
-
+        <menuitem id="menu_root" name="APU" />
    
     <menuitem id="menu_apu" name="apus" parent="menu_root" />
 
