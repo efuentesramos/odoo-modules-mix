@@ -305,17 +305,17 @@ class apu(models.Model):
             material_db=self.env['apu.manager.material']
             equipment_db=self.env['apu.manager.equipment']
             manpower_db=self.env['apu.manager.manpower']
-            #other_items_db=self.env['other.item']
+            other_items_db=self.env['other.item']
 
             query_material_db = text("SELECT * FROM material")
             query_equipment_db = text("SELECT * FROM equipment")
             query_manpower_db = text("SELECT * FROM manpower")  
-            #query_other_items_db = text("SELECT * FROM other.item")
+            query_other_items_db = text("SELECT * FROM other_item")
             
             all_materials = connection.execute(query_material_db).fetchall()
             all_equipment = connection.execute(query_equipment_db).fetchall()
             all_mampower = connection.execute(query_manpower_db).fetchall()
-            #all_othre_item = connection.execute(query_material_db).fetchall()
+            all_other_item = connection.execute(query_other_items_db).fetchall()
 
             
 
@@ -340,6 +340,12 @@ class apu(models.Model):
                 manpower_db.create({'name':item_material[0],'unit_measurement':item_material[1],'unit_cost':item_material[2] })
             
 
+             #---------- Creation Of Other Items  -----------------
+
+            for item_material in all_other_item:
+
+                other_items_db.create({'name':item_material[1],'unit_measurement':item_material[2],'unit_cost':item_material[3] })
+            
 
             dbsource.connection_close_mssql(connection)
 
