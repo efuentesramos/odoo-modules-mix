@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_buggie_billing_statement" model="ir.sequence">
+            <field name="name">Cuenta de Cobro Buggies</field>
+            <field name="code">buggie.billing.statement</field>
+            <field name="prefix">COB-%(year)s-</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>

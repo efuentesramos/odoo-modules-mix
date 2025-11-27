@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="buggie_rent_rate_buggie_view_form" model="ir.ui.view">
+            <field name="name">rate_buggie.view.form</field>
+            <field name="model">buggie.rate</field>
+            <field name="arch" type="xml">
+                <form string="Tarifas">
+                  
+                        <group>
+                            <field name="price_per_day"/>
+                            <field name="start_date"/>
+                            <field name="end_date" />                     
+                        </group>
+                        
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="buggie_rent_rate_buggie_view_tree" model="ir.ui.view">
+            <field name="name">rate_buggie.view.tree</field>
+            <field name="model">buggie.rate</field>
+            <field name="arch" type="xml">
+                <tree string="Tarifas">
+                    <field name="price_per_day"/>
+                    <field name="start_date"/>
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+
+  
+        <record id="buggie_rent_rate_buggie_action" model="ir.actions.act_window">
+            <field name="name">Tarifas</field>
+            <field name="res_model">buggie.rate</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+   
+    
+    <menuitem id="menu_rate_buggie" name="Tarifas" parent="buggie_menu_root" />
+
+    <menuitem id="menu__rate_buggie__act" 
+            name="Materiales" 
+            parent="menu_rate_buggie" 
+            action="buggie_rent_rate_buggie_action" 
+            sequence="30"/>
+
+    </data>
+
+</odoo>

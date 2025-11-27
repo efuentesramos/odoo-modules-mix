@@ -1,0 +1,57 @@
+<odoo>
+    <template id="report_buggie_billing">
+         <!-- Contenedor principal con <main> -->
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+
+                        <!-- ENCABEZADO -->
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <h2>Cuenta de Cobro</h2>
+                                <p><strong>Cliente:</strong> <span t-esc="doc.customer_id.name"/></p>
+                                <p><strong>Documento:</strong> <span t-esc="doc.customer_id.vat or ''"/></p>
+                                <p><strong>Fecha:</strong> <span t-esc="doc.date_to"/></p>
+                            </div>
+                            
+                        </div>
+
+                        <!-- DETALLE TABLA -->
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width:5%;">#Referencia</th>
+                                    <th style="width:40%;">Fecha de Alquiler</th>
+
+                                    <th style="width:20%;">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.rental_ids" t-as="line" t-esc-options='{"widget": "html"}'>
+                                    <tr>
+                                        <td><span t-esc="line.rental_name"/></td>                                
+                                        <td class="text-center"><span t-esc="line.rental_date"/></td>
+                                        <td class="text-right"><span t-esc="line.total_amount"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- TOTALES -->
+                        <div class="text-right mt-3">
+                            
+                            <p><strong>Total:</strong> <span t-esc="doc.total"/></p>
+                        </div>
+
+                        <!-- PIE DE PÁGINA -->
+                        <div class="mt-5">
+                            <p><em>Gracias por confiar en nuestro servicio.</em></p>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>    
+    </template>
+</odoo>

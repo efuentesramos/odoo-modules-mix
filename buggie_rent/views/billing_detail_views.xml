@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_buggie_billing_detail_tree" model="ir.ui.view">
+        <field name="name">buggie.billing.detail.tree</field>
+        <field name="model">buggie.billing.detail</field>
+        <field name="arch" type="xml">
+            <tree string="Detalle de Cuenta de Cobro">
+                <field name="statement_id"/>
+                <field name="rental_name"/>
+                <field name="rental_date"/>
+                <field name="total_amount" widget="monetary"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

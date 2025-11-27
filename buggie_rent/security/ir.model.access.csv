@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_buggie_rent_buggie_buggie,buggie.rent.buggie.buggie,model_buggie_buggie,base.group_user,1,1,1,1
+
+access_buggie_rent_buggie_rental,buggie.rent.buggie.rental,model_buggie_rental,base.group_user,1,1,1,1
+
+access_buggie_rent_buggie_rate, buggie.rent.buggie.rate,model_buggie_rate,base.group_user,1,1,1,1
+
+access_buggie_rent_rental_detail,buggie.rent.rental.detail,model_rental_detail,base.group_user,1,1,1,1
+
+access_buggie_rent_buggie_billing_statement,buggie.rent.buggie.billing.statement,model_buggie_billing_statement,base.group_user,1,1,1,1
+
+access_buggie_billing_detail,buggie.rent.buggie.billing.detail,model_buggie_billing_detail,base.group_user,1,1,1,1
+
+access_buggie_billing_payment,buggie.billing.payment,model_buggie_billing_payment,base.group_user,1,1,1,1
+
+

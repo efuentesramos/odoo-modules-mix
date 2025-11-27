@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <record id="buggie_rental_view_form" model="ir.ui.view">
+            <field name="name">buggie.rental.view.form</field>
+            <field name="model">buggie.rental</field>
+            <field name="arch" type="xml">
+                <form string="REGISTRO DE ALQUILER DE BUGGIE">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="customer_id"/>
+                            <field name="rental_date"/>
+                            <field name="price_per_day"/>
+                                                
+                        </group>
+                        <h2 class="oe_center">Detalles de Buggies </h2>
+                        <notebook>
+                            <page name="Detalle" string="Buggies">
+                                <field name="rental_lines">
+                                    <tree create="1" edit="1" delete="1" editable="top">
+                                        <field name="buggie_id"/>
+                                        <field name="delivery_date"/>                                        
+                                        <field name="return_date"/> 
+                                        <field name="quantity_days"/>
+                                        <field name="subtotal" sum="Total"/>
+                                        
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="buggie_rental_view_tree" model="ir.ui.view">
+            <field name="name">buggie.rental.view.tree</field>
+            <field name="model">buggie.rental</field>
+            <field name="arch" type="xml">
+                <tree string="Alquileres">
+                  
+                        <field name="name"/>
+                        <field name="customer_id"/>
+                        <field name="rental_date"/>
+                        <field name="price_per_day"/>
+                        
+                </tree>
+            </field>
+        </record>
+
+        
+        <record id="buggie_rental_action" model="ir.actions.act_window">
+            <field name="name">buggie_rental</field>
+            <field name="res_model">buggie.rental</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    
+    
+    <menuitem id="menu_buggie_rental" name="Alquileres" parent="buggie_menu_root" />
+
+    <menuitem id="menu__buggie_rental__act" 
+            name="Alquileres" 
+            parent="menu_buggie_rental" 
+            action="buggie_rental_action" 
+            sequence="30"/>
+
+    </data>
+
+</odoo>

@@ -1,0 +1,123 @@
+<odoo>
+    <record id="view_rental_detail_tree" model="ir.ui.view">
+        <field name="name">rental.detail.tree</field>
+        <field name="model">rental.detail</field>
+        <field name="arch" type="xml">
+            <tree string="Detalles de Alquileres">
+                <field name="buggie_id"/>
+                <field name="delivery_date"/>
+                <field name="return_date"/>
+                <field name="is_returned" widget="boolean_button"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_rental_detail" model="ir.actions.act_window">
+        <field name="name">Estado de Alquiler</field>
+        <field name="res_model">rental.detail</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_today_rentals': 1}</field>
+        <field name="help" type="html">
+            <p>Desde aquí puedes gestionar el retorno de buggies.</p>
+        </field>
+    </record>
+
+     <!-- Vista Kanban -->
+    <record id="view_rental_detail_kanban" model="ir.ui.view">
+        <field name="name">rental.detail.kanban</field>
+        <field name="model">rental.detail</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="is_returned" class="o_kanban_example">
+                <field name="buggie_id"/>
+                <field name="delivery_date"/>
+                <field name="return_date"/>
+                <field name="is_returned"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                           <!-- Encabezado con nombre del buggy -->
+                            <div class="o_kanban_primary_left">
+                                <strong>
+                                    <field name="buggie_id"/>
+                                </strong>
+                            </div>
+
+                            <!-- Estado con badge e icono -->
+                            <div class="o_kanban_primary_right">
+                                <span t-if="record.is_returned.raw_value"
+                                      class="badge bg-success">
+                                    <i class="fa fa-check-circle"/> Devuelto
+                                </span>
+                                <span t-if="!record.is_returned.raw_value"
+                                      class="badge bg-danger">
+                                    <i class="fa fa-exclamation-triangle"/> Pendiente
+                                </span>
+                            </div>
+
+                            <!-- Fechas -->
+                            <div class="o_kanban_secondary mt-2">
+                                <div>
+                                    <i class="fa fa-calendar"/> Salida: 
+                                    <field name="delivery_date"/>
+                                </div>
+                                <div t-if="record.return_date.value">
+                                    <i class="fa fa-calendar-check"/> Retorno: 
+                                    <field name="return_date"/>
+                                </div>
+                            </div>
+
+                            <!-- Botón de acción rápida -->
+                            <div class="o_kanban_footer mt-2">
+                                <button t-if="!record.is_returned.raw_value"
+                                        type="object"
+                                        name="action_mark_returned"
+                                        class="btn btn-sm btn-primary">
+                                    <i class="fa fa-undo"/> Marcar como devuelto
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Acción para usar la vista kanban -->
+    <record id="action_rental_detail_kanban" model="ir.actions.act_window">
+        <field name="name">Tablero de Alquileres</field>
+        <field name="res_model">rental.detail</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_today_rentals': 1}</field>
+    </record>
+
+    <!-- Menú para abrir el tablero -->
+    <menuitem id="menu_rental_detail_kanban"
+              name="Tablero de Alquileres"
+              parent="menu_buggie_rental"
+              action="action_rental_detail_kanban"
+              sequence="25"/>
+
+
+    <!-- Filtro inteligente para Aquileres del dia en curso -->
+    <record id="rental_detail_search_view" model="ir.ui.view">
+        <field name="name">rental.detail.search</field>
+        <field name="model">rental.detail</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Alquileres de Hoy"
+                        name="today_rentals"
+                        domain="[('delivery_date','&gt;=', context_today().strftime('%%Y-%%m-%%d 00:00:00')),
+                                 ('delivery_date','&lt;=', context_today().strftime('%%Y-%%m-%%d 23:59:59'))]"/>
+            </search>
+        </field>
+    </record>
+  
+    <menuitem id="menu_rental_detail_act"
+              name="Detalle de Alquiler"
+              parent="menu_buggie_rental"
+              action="action_rental_detail"
+              sequence="20"/>
+
+</odoo>

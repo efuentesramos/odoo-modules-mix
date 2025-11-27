@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <!-- Acción del reporte -->
+        <report
+            id="action_report_buggie_billing"
+            model="buggie.billing.statement"
+            string="Cuenta de Cobro"
+            report_type="qweb-pdf"
+            name="buggie_rent.report_buggie_billing"
+            file="buggie_rent.report_buggie_billing"
+            print_report_name="'Cuenta_Cobro_%s' % (object.name)"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <record id="bugguie_view_form" model="ir.ui.view">
+            <field name="name">buggie.view.form</field>
+            <field name="model">buggie.buggie</field>
+            <field name="arch" type="xml">
+                <form string="Buggie">
+                  
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="is_available"/>
+                            <field name="active"/>
+                                                
+                        </group>
+                   
+                </form>
+            </field>
+        </record>
+
+
+        <record id="buggie_view_tree" model="ir.ui.view">
+            <field name="name">buggie.view.tree</field>
+            <field name="model">buggie.buggie</field>
+            <field name="arch" type="xml">
+                <tree string="Bugguie">
+                  
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="is_available"/>
+                        <field name="active"/>
+                        
+                </tree>
+            </field>
+        </record>
+
+        
+        <record id="buggie_action" model="ir.actions.act_window">
+            <field name="name">buggie</field>
+            <field name="res_model">buggie.buggie</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    <menuitem id="buggie_menu_root" name="Buggies" />
+    
+    <menuitem id="menu_buggie" name="buggie" parent="buggie_menu_root" />
+
+    <menuitem id="menu__buggie__act" 
+            name="buggie" 
+            parent="menu_buggie" 
+            action="buggie_action" 
+            sequence="30"/>
+
+    </data>
+
+</odoo>

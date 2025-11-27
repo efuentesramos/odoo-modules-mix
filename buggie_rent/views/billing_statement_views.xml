@@ -1,0 +1,97 @@
+<odoo>
+    <record id="view_buggie_billing_statement_tree" model="ir.ui.view">
+        <field name="name">buggie.billing.statement.tree</field>
+        <field name="model">buggie.billing.statement</field>
+        <field name="arch" type="xml">
+            <tree string="Cuentas de Cobro">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="total" widget="monetary"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_buggie_billing_statement_form" model="ir.ui.view">
+        <field name="name">buggie.billing.statement.form</field>
+        <field name="model">buggie.billing.statement</field>
+        <field name="arch" type="xml">
+            <form string="Cuenta de Cobro">
+                <header>
+                    <button name="action_fill_rentals"
+                        string="Agregar alquileres"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="customer_id"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+
+                    <group>
+                        <field name="total" readonly="1" widget="monetary"/>
+                        <field name="balance_due" readonly="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Alquileres facturados">
+                            <field name="rental_ids">
+                                <tree editable="bottom">
+                                    <field name="rental_name"/>
+                                    <field name="rental_date"/>
+                                    <field name="total_amount" widget="monetary"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Abonos">
+                            <field name="payment_ids" >
+                                <tree editable="bottom">
+                                    <field name="payment_date"/>
+                                    <field name="amount"/>
+                                    <field name="notes"/>
+                                </tree>
+                            </field>
+
+                            <group>
+                                <field name="total_payments" readonly="1"/>
+                                
+                            </group>
+
+                            
+                        </page>
+                        
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_buggie_billing_statements" model="ir.actions.act_window">
+        <field name="name">Cuentas de Cobro</field>
+        <field name="res_model">buggie.billing.statement</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>Desde aquí puedes gestionar las cuentas de cobro por cliente y período.</p>
+        </field>
+    </record>
+
+
+  
+    <menuitem id="menu_buggie_billing_statements_act"
+              name="Cuentas de Cobro"
+              parent="menu_buggie_rental"
+              action="action_buggie_billing_statements"
+              sequence="20"/>
+
+
+
+</odoo>
